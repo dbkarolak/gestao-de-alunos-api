@@ -41,6 +41,7 @@ banco está vazio (veja [Dados fake pré-carregados](#dados-fake-pré-carregados
 - **morgan** — log de requisições HTTP no console
 - **nodemon** (dependência de desenvolvimento) — reinício automático do servidor durante o
   desenvolvimento
+- **dotenv** — carrega as variáveis de ambiente do arquivo `.env`
 
 A autenticação é real: senhas com hash (bcrypt) e sessões via JWT assinado.
 
@@ -72,16 +73,21 @@ src/
   utils/
     ApiError.js
     asyncHandler.js
+test/
+  external/             # testes de caixa-preta, via HTTP (exigem a API no ar)
+  internal/             # testes que carregam a aplicação em memória
+  fixtures/             # dados dos cenários em JSON (data-driven testing)
+  helpers/              # api(), login de admin e de aluno, chamadas reutilizáveis
 docs/
   openapi.yaml            # especificação Swagger/OpenAPI (fonte da documentação)
-  .env.example            # exemplo das informações de configuração do projeto
+.env.example            # exemplo das informações de configuração do projeto
 ```
 
 ## Instalação e execução
 
 Pré-requisitos:
 
-- Node.js 18+ (usa `crypto.randomUUID`, disponível nativamente).
+- Node.js 20.10+ (os testes importam JSON com `import ... with { type: 'json' }`).
 - Uma instância do **MongoDB** acessível (local ou remota).
 
 ```bash
@@ -261,3 +267,46 @@ curl -X POST http://localhost:3000/api/alunos/aluno-ana-souza/trabalhos \
 
 > Novos registros criados via API recebem ids no formato UUID (gerados com
 > `crypto.randomUUID()`), diferente dos ids legíveis usados nos dados fake acima.
+
+## Testes automatizados
+
+A suíte usa Mocha (runner), SuperTest (requisições HTTP) e Chai (asserções), organizada em dois
+estilos:
+
+- `test/external/` — testes de caixa-preta, que batem na API por HTTP usando a `BASE_URL`.
+  Exigem a API em execução.
+- `test/internal/` — testes que carregam a aplicação em memória, sem precisar do servidor no ar.
+
+Os dados dos cenários ficam em `test/fixtures/` e os helpers de autenticação e de chamadas à API
+em `test/helpers/`.
+
+### Rodando localmente
+
+```bash
+cp .env.example .env    # preencha os valores
+npm install
+npm run dev             # em um terminal, sobe a API
+npm test                # em outro terminal
+```
+
+É preciso um MongoDB acessível na `MONGODB_URI`. O jeito mais rápido é via Docker:
+
+```bash
+docker run -d -p 27017:27017 --name mongo mongo:7
+```
+
+Na primeira subida com o banco vazio, o seed cria o administrador e os dados de demonstração.
+
+### Rodando na pipeline
+
+O workflow sobe um container do MongoDB, inicia a API e executa os testes. As credenciais usadas
+pelos testes vêm de GitHub Secrets, então, ao usar este repositório em outra conta, crie em
+**Settings > Secrets and variables > Actions** os três segredos abaixo:
+
+| Secret         | Conteúdo                                                        |
+|----------------|-----------------------------------------------------------------|
+| `ADMIN_EMAIL`  | e-mail do administrador criado pelo seed                        |
+| `ADMIN_SENHA`  | senha desse administrador                                        |
+| `JWT_SECRET`   | qualquer texto aleatório usado para assinar os tokens            |
+
+Sem eles, o `.env` gerado pela pipeline fica com os campos vazios e os testes falham com 401.
