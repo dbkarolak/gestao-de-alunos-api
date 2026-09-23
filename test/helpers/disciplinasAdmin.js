@@ -4,7 +4,7 @@ export async function cadastrarDisciplina(adminToken, dadosDisciplina) {
     const resposta = await api()
         .post('/api/admin/disciplinas')
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Authorization', `${adminToken}`)
         .send(dadosDisciplina);
  
     if (resposta.status !== 201) {
@@ -17,7 +17,7 @@ export async function matricularAlunoNaDisciplina(adminToken, disciplinaId, alun
     const resposta = await api()
         .post(`/api/admin/disciplinas/${disciplinaId}/matriculas`)
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Authorization', `${adminToken}`)
         .send({ alunoId });
  
     if (resposta.status !== 201) {
