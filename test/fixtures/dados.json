@@ -1,0 +1,59 @@
+[
+    {
+        "testTitle": "E2E: Validar que a aluna Ada Lovelace é cadastrada corretamente pelo perfil Admin quando dados válidos são enviados e que Ada consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "dadosAluno": {
+            "nome": "Ada Lovelace",
+            "email": "ada.lovelace@example.com",
+            "matricula": "20261001",
+            "senha": "Analytical@1843"
+        },
+        "dadosDisciplina": {
+            "nome": "Algoritmos e Programação",
+            "codigo": "ALP101",
+            "cargaHoraria": 80
+        },
+        "dadosTrabalho": {
+            "titulo": "O primeiro algoritmo da história",
+            "descricao": "Análise das notas sobre a Máquina Analítica e do cálculo dos números de Bernoulli."
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "E2E: Validar que a aluna Marie Curie é cadastrada corretamente pelo perfil Admin quando dados válidos são enviados e que Marie consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "dadosAluno": {
+            "nome": "Marie Curie",
+            "email": "marie.curie@example.com",
+            "matricula": "20261002",
+            "senha": "Polonio@1898"
+        },
+        "dadosDisciplina": {
+            "nome": "Química Experimental",
+            "codigo": "QEX202",
+            "cargaHoraria": 120
+        },
+        "dadosTrabalho": {
+            "titulo": "Relatório de isolamento do rádio",
+            "descricao": "Descrição do processo de separação e das medições de radiação obtidas em laboratório."
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "E2E: Validar que o aluno Santos Dumont é cadastrado corretamente pelo perfil Admin quando dados válidos são enviados e que Santos Dumont consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "dadosAluno": {
+            "nome": "Alberto Santos Dumont",
+            "email": "alberto.dumont@example.com",
+            "matricula": "20261003",
+            "senha": "14Bis@1906"
+        },
+        "dadosDisciplina": {
+            "nome": "Aerodinâmica Experimental",
+            "codigo": "AER303",
+            "cargaHoraria": 60
+        },
+        "dadosTrabalho": {
+            "titulo": "Análise de sustentação do 14-Bis",
+            "descricao": "Estudo das forças envolvidas no primeiro voo homologado e comparação com modelos atuais."
+        },
+        "statusCodeEsperado": 201
+    }
+]
