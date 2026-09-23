@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
+    env:
+      BASE_URL: http://localhost:3000
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_SENHA: ${{ secrets.ADMIN_SENHA }}
+      MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
     services:
       mongodb:
         image: mongo:7
@@ -36,9 +43,6 @@ jobs:
 
       - name: Instalar dependências
         run: npm ci
-
-      - name: Criar o .env a partir do .env.example
-        run: cp .env.example .env
 
       - name: Subir a API em segundo plano
         run: |
