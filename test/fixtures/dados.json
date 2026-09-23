@@ -1,6 +1,6 @@
 [
     {
-        "testTitle": "E2E: Validar que a aluna Ada Lovelace é cadastrada corretamente pelo perfil Admin quando dados válidos são enviados e que Ada consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "testTitle": "Validar que a aluna Ada Lovelace, cadastrada pelo admin e matriculada em Algoritmos e Programação, consegue registrar a entrega de um trabalho",
         "dadosAluno": {
             "nome": "Ada Lovelace",
             "email": "ada.lovelace@example.com",
@@ -19,7 +19,7 @@
         "statusCodeEsperado": 201
     },
     {
-        "testTitle": "E2E: Validar que a aluna Marie Curie é cadastrada corretamente pelo perfil Admin quando dados válidos são enviados e que Marie consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "testTitle": "Validar que a aluna Marie Curie, cadastrada pelo admin e matriculada em Química Experimental, consegue registrar a entrega de um trabalho",
         "dadosAluno": {
             "nome": "Marie Curie",
             "email": "marie.curie@example.com",
@@ -38,7 +38,7 @@
         "statusCodeEsperado": 201
     },
     {
-        "testTitle": "E2E: Validar que o aluno Santos Dumont é cadastrado corretamente pelo perfil Admin quando dados válidos são enviados e que Santos Dumont consegue registrar a entrega de um trabalho quando os dados enviados são válidos",
+        "testTitle": "Validar que o aluno Alberto Santos Dumont, cadastrado pelo admin e matriculado em Aerodinâmica Experimental, consegue registrar a entrega de um trabalho",
         "dadosAluno": {
             "nome": "Alberto Santos Dumont",
             "email": "alberto.dumont@example.com",

@@ -6,7 +6,7 @@ import { registrarTrabalho } from '../helpers/autoAtendimentoAluno.js';
 import { limparDadosDoTeste } from '../helpers/limpezaDeDados.js';
 import testesDeEntregaTrabalhos from '../fixtures/dados.json' with { type: 'json' };
 
-describe('Fluxo E2E: cadastro de aluno e registro de entrega de trabalho', () => {
+describe('Cadastro de Aluno e Entrega de Trabalho', () => {
     testesDeEntregaTrabalhos.forEach((testeDeEntregaTrabalho) => {
         it(testeDeEntregaTrabalho.testTitle, async () => {
             const { dadosAluno, dadosDisciplina, dadosTrabalho, statusCodeEsperado } = testeDeEntregaTrabalho;
