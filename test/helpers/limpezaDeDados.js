@@ -1,13 +1,12 @@
 import { api } from './api.js';
-import { getAdminToken } from './auth-helper.js';
- 
+import { comTokenDeAdmin } from './auth.js';
+
 export async function limparDadosDoTeste({ dadosAluno, dadosDisciplina }) {
-    const adminToken = await getAdminToken();
-    const auth = `Bearer ${adminToken}`;
- 
+    const auth = await comTokenDeAdmin();
+
     const alunos = await api().get('/api/admin/alunos').set('Authorization', auth);
     const aluno = alunos.body.find((a) => a.email === dadosAluno.email || a.matricula === dadosAluno.matricula);
- 
+
     if (aluno) {
         const trabalhos = await api().get(`/api/admin/trabalhos?alunoId=${aluno.id}`).set('Authorization', auth);
         for (const trabalho of trabalhos.body) {
@@ -15,7 +14,7 @@ export async function limparDadosDoTeste({ dadosAluno, dadosDisciplina }) {
         }
         await api().delete(`/api/admin/alunos/${aluno.id}`).set('Authorization', auth);
     }
- 
+
     const disciplinas = await api().get('/api/admin/disciplinas').set('Authorization', auth);
     const disciplina = disciplinas.body.find((d) => d.codigo === dadosDisciplina.codigo);
     if (disciplina) {
