@@ -6,10 +6,7 @@ export async function cadastrarDisciplina(adminToken, dadosDisciplina) {
         .set('Content-Type', 'application/json')
         .set('Authorization', `${adminToken}`)
         .send(dadosDisciplina);
- 
-    if (resposta.status !== 201) {
-        throw new Error(`Falha ao cadastrar disciplina: ${resposta.status} ${JSON.stringify(resposta.body)}`);
-    }
+
     return resposta;
 }
  
@@ -19,9 +16,6 @@ export async function matricularAlunoNaDisciplina(adminToken, disciplinaId, alun
         .set('Content-Type', 'application/json')
         .set('Authorization', `${adminToken}`)
         .send({ alunoId });
- 
-    if (resposta.status !== 201) {
-        throw new Error(`Falha ao matricular aluno: ${resposta.status} ${JSON.stringify(resposta.body)}`);
-    }
+        
     return resposta;
 }
